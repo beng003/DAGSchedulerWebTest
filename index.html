@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文件内容查看</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <!-- 左侧按钮面板 -->
+      <div class="btn-panel">
+        <h4>导航按钮</h4>
+        <div class="btn-group">
+          <!-- 添加后端API调用按钮 -->
+          <button class="btn btn-primary nav-btn api-btn" id="btnGetTaskList">
+            <i class="bi bi-list-task"></i> 获取任务列表
+          </button>
+          <button class="btn btn-success nav-btn api-btn" id="btnAddTask">
+            <i class="bi bi-add-task"></i> 添加任务
+          </button>
+          <button class="btn btn-info nav-btn api-btn" id="btnStartTask">
+            <i class="bi bi-play-circle"></i> 启动任务
+          </button>
+          <button class="btn btn-warning nav-btn api-btn" id="btnStopTask">
+            <i class="bi bi-stop-circle"></i> 停止任务
+          </button>
+        </div>
+      </div>
+
+      <!-- 右侧内容区域 -->
+      <div class="content">
+        <header>
+          <h1>WebSocket实时日志显示器</h1>
+          <div class="controls">
+            <div class="connection-status">
+              <div class="status-indicator" id="statusIndicator"></div>
+              <span id="statusText">未连接</span>
+            </div>
+            <button id="clearBtn">清空日志</button>
+          </div>
+        </header>
+
+        <div class="filters">
+          <div class="filter-group">
+            <label for="searchInput">搜索:</label>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="输入关键词过滤..."
+            />
+          </div>
+          <div class="filter-group">
+            <label><input type="checkbox" id="showInfo" checked /> INFO</label>
+            <label
+              ><input type="checkbox" id="showWarning" checked /> WARNING</label
+            >
+            <label
+              ><input type="checkbox" id="showError" checked /> ERROR</label
+            >
+            <label><input type="checkbox" id="showDebug" /> DEBUG</label>
+          </div>
+        </div>
+
+        <div class="log-container" id="logContainer">
+          <div class="log-entry log-info">等待日志数据...</div>
+        </div>
+
+        <footer>
+          <p>
+            WebSocket日志显示器 &copy; 2023 | 连接状态:
+            <span id="connectionInfo">未连接</span>
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- 添加隐藏的文件输入元素 -->
+    <input
+      type="file"
+      id="taskFileInput"
+      accept=".json,.yaml,.yml"
+      style="display: none"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/ansi_up@5.0.0/ansi_up.min.js"></script>
+    <!-- 添加YAML解析库 -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="app-config.js"></script>
+    <script>
+      // 配置文件
+      const config = {
+        fileBaseUrl: "http://" + appConfig.fileBaseUrl,
+        pollInterval: appConfig.pollInterval,
+        currentFile: "/logs/download",
+        lastContent: "",
+        pollTimer: null,
+        // 新增：是否用户正在滚动的标志
+        isUserScrolling: false,
+        // 新增：防抖计时器
+        scrollSaveTimer: null,
+      };
+    </script>
+    <script src="api-service.js"></script>
+    <script src="log-websocket.js"></script>
+  </body>
+</html>

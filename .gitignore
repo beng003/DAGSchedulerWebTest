@@ -1,0 +1,13 @@
+.venv
+__pycache__
+logs
+./coverage.xml
+./.coverage
+*.log
+.envrc
+todo.md
+./docker/nginx/data
+caddyfile.txt
+# *.js
+node_modules
+app-config.js

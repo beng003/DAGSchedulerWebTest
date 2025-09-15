@@ -1,0 +1,256 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7f9;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px 15px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  max-width: 88vw; /* 限制最大宽度 */
+  margin: 0 auto; /* 居中显示 */
+}
+
+/* 左侧按钮面板 */
+.btn-panel {
+  width: 250px;
+  padding: 20px;
+  border-right: 1px solid #e0e0e0;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav-btn {
+  transition: all 0.3s ease;
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 右侧内容区域 */
+.content {
+  /* 固定尺寸设置 */
+  /* width: 1100px; 固定宽度 */
+  /* height: 850px; 固定高度 */
+
+  width: 88%; /* 占据父容器宽度的80% */
+  height: 96vh; /* 占据视口高度的90% */
+
+  /* 确保后代元素不会超出边界 */
+  overflow: hidden; /* 超出部分隐藏 */
+
+  /* 布局调整 */
+  flex-grow: 0; /* 不再占据剩余空间 */
+  margin: 0 auto; /* 水平居中 */
+
+  /* 其他样式保持不变 */
+  min-width: 0;
+  background-color: #252525;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  box-sizing: border-box;
+
+  /* 添加内部弹性布局 */
+  display: flex;
+  flex-direction: column;
+}
+#statusText {
+  color: #4ec9b0;
+}
+
+.content header {
+  background-color: #2c2c2c;
+  padding: 15px 20px;
+  border-bottom: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content h1 {
+  font-size: 1.5rem;
+  color: #4ec9b0;
+}
+
+.content .controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+button {
+  background-color: #3273dc;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #2765c8;
+}
+
+button#clearBtn {
+  background-color: #ff3860;
+}
+
+button#clearBtn:hover {
+  background-color: #e53259;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff3860;
+}
+
+.connected {
+  background-color: #23d160;
+}
+
+.filters {
+  background-color: #2c2c2c;
+  padding: 15px 20px;
+  border-bottom: 1px solid #444;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-group label {
+  font-size: 0.9rem;
+  color: #f6fbfa;
+}
+
+input[type="text"] {
+  background-color: #3c3c3c;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  padding: 6px 10px;
+  border-radius: 4px;
+  width: 200px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.log-container {
+  height: 70vh;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #1e1e1e;
+}
+
+.log-entry {
+  padding: 6px 10px;
+  border-bottom: 1px solid #333;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 0.9rem;
+}
+
+.log-entry:last-child {
+  border-bottom: none;
+}
+
+.log-info {
+  color: #e0e0e0;
+}
+
+.log-warning {
+  color: #ffdd86;
+  background-color: rgba(255, 221, 134, 0.05);
+}
+
+.log-error {
+  color: #ff3860;
+  background-color: rgba(255, 56, 96, 0.08);
+}
+
+.log-critical {
+  color: #ff3860;
+  background-color: rgba(255, 56, 96, 0.12);
+  font-weight: bold;
+}
+
+.log-debug {
+  color: #8a8a8a;
+}
+
+.timestamp {
+  color: #6c9acf;
+  margin-right: 10px;
+}
+
+footer {
+  padding: 15px 20px;
+  background-color: #2c2c2c;
+  border-top: 1px solid #444;
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .btn-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .content {
+    padding: 10px;
+    width: 100%; /* 移动端占满宽度 */
+  }
+  .filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+  input[type="text"] {
+    width: 100%;
+  }
+}

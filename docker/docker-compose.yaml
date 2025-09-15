@@ -1,0 +1,12 @@
+services:
+  DAGSchedulerWebTest:
+    image: crpi-84gohwg2zpoyckdg.cn-hangzhou.personal.cr.aliyuncs.com/beng003_docker/dagscheduler-frontend:latest # 这里指定构建的镜像名称
+    container_name: DAGSchedulerWebTest
+    ports:
+      - "8083:8081"
+    # networks:
+    #   - network_beng003
+    environment:
+      - FILE_BASE_URL=211.87.232.108:9099
+    volumes:
+      - ../app-config.js:/app/app-config.js
